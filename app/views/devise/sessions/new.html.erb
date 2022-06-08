@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row mt-4 justify-content-center">
+    <div class="col sm-6">
+      <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h1 class="text-center"><%= t('.sign_in') %></h1>
+
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-group font-weight-bolder">
+              <%= f.label :email, class: "exampleInputEmail1" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: "Enter email" %>
+            </div>
+
+            <div class="form-group font-weight-bolder">
+              <%= f.label :password %>
+              <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', placeholder: "Enter password" %>
+            </div>
+            
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to t(".forgot_your_password?"), new_password_path(resource_name) %><br />
+            <% end -%>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="form-group form-check mt-4">
+                <%= f.check_box :remember_me, class: 'form-check-input' %>
+                <%= f.label :remember_me, class: 'form-check-label' do %>
+                  <%= resource.class.human_attribute_name('remember_me') %>
+                <% end %>
+              </div>
+            <% end %>
+
+            <div class="form-group text-center">
+              <%= f.submit  t('.sign_in'), class: 'btn btn-outline-primary font-weight-bolder' %>
+            </div>
+          <% end %>
+          <div class="text-center">
+            <%= render 'devise/shared/links' %>
+          </div>   
+        </div>  
+      </div>  
+    </div>   
+  </div>   
+</div>
+
+
