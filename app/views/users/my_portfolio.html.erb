@@ -2,7 +2,7 @@
 
 <div class="search-area mt-4">
   <h3>Search stocks</h3>
-  <%= form_tag "#", method: :get do %>
+  <%= form_tag "search_stock", remote: true, method: :get do %>
     <div class="form-group row mt-2">
       <div class="col-sm-9 no-right-padding">
         <%= text_field_tag :stock, params[:stock], autofocus: true, placeholder: "Enter ticker symbol", class: "form-control form-control-lg" %>
@@ -14,4 +14,8 @@
       </div>
     </div>  
   <% end %>
-</div>   
+</div>
+<div id="results">
+
+</div>
+  

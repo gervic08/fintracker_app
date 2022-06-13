@@ -1,0 +1,11 @@
+<div class="row ml-1">
+  <%= render "layouts/messages" %>
+</div>
+
+<% if @stock %>   
+  <div class="card card-title bg-light inline-text">
+    <strong>Stock name: </strong><%= @stock.name %>.
+    <strong>Ticker Symbol: </strong><%= @stock.ticker %>.
+    <strong>Price: </strong><%= @stock.price %>.
+  </div>
+<% end %>
