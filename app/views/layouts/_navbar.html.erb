@@ -1,6 +1,17 @@
 <div class="container">
   <nav class="navbar shadow-sm p-3 mb-5 rounded navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand font-weight-bolder" href="#">FinTrack</a>
+    <% if current_user %>
+      <div class="dropdown ml-auto mr-4">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon "user"%> <%= current_user.full_name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %>
+        </div>
+      </div>
+    <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
