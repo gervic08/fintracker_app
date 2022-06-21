@@ -6,4 +6,19 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def under_max_tracked_stocks?
+    stocks.count < 10
+  end
+
+  def stock_already_tracked?(ticker)
+    stock = stocks.where(ticker: ticker)
+    return true if stock.empty?
+
+    false
+  end
+
+  def can_track_stock?(ticker)
+    under_max_tracked_stocks? && stock_already_tracked?(ticker)
+  end
 end
