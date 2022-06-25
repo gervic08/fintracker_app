@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"><%= 'Ticker' %></th>
+      <th scope="col"><%= 'Name' %></th>
+      <th scope="col"><%= 'Price' %></th>
+      <th scope="col"><%= 'Action' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tracked_stocks.each do |stock| %>
+      <tr>
+        <th scope="row"><%= stock.ticker %></th>
+        <td><%= stock.name %></td>
+        <td><%= stock.price %></td>
+        <td>
+        <% if current_user.id == @user.id %>
+          <%= link_to 'Remove', user_stock_path(stock), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-warning" %></td>
+        <% else %>
+          <% if current_user.can_track_stock?(stock.ticker) %>
+            <%= link_to 'Add stock to my portfolio', user_stocks_path(user: current_user, ticker: stock.ticker), method: :post, class: "btn-sm btn-success inline-text" %></td>
+          <% else%>
+            <div class="card card-title bg-light inline-text"><%= "Stock already in your portfolio" %></td>
+          <% end %>
+        <% end %>    
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  

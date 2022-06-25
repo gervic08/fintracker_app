@@ -13,16 +13,28 @@
   <% end %>  
 <% end %>
 
-<% if @friends %>   
-  <% @friends.each do |friend| %>
-    <% unless friend.id == current_user.id %>
-      <div class="card card-title bg-light inline-text">
-        <strong>Email: </strong><%= friend.email %>.
-        <strong>Name: </strong><%= friend.full_name %>.
-      </div>
-      <% unless current_user.friends.include?(friend) %>
-        <%= link_to "Follow #{friend.full_name}", friendships_path(user_id: current_user, friend_id: friend.id), method: :post, class: "btn btn-success inline-text" %>
-      <% end %>
-    <% end %>  
-  <% end %>     
-<% end %>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"><%= 'Email' %></th>
+      <th scope="col"><%= 'User Name' %></th>
+      <th scope="col"><%= 'Action' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @friends %>   
+      <% @friends.each do |friend| %>
+        <% unless friend.id == current_user.id %>
+          <tr>
+            <th scope="row"><%= friend.email %></th>
+            <td><%= friend.full_name %></td>
+            <td>
+            <% unless current_user.friends.include?(friend) %>
+              <%= link_to "Follow #{friend.full_name}", friendships_path(friend_id: friend.id), method: :post, class: "btn btn-success inline-text" %></td>
+            <% end %>
+          </tr>  
+        <% end %>  
+      <% end %>     
+    <% end %>
+  </tbody>
+</table>  

@@ -9,8 +9,13 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
 
+  def show
+    @user = User.find_by(id: params[:id])
+    @tracked_stocks = @user.stocks 
+  end
+
   def search
-    @friends = User.results(params[:friend])
+    @friends = User.results(params[:friend]).uniq
     if @friends
       respond_to do |format|
         format.js { render partial: 'users/results.js' }
