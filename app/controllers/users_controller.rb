@@ -15,13 +15,20 @@ class UsersController < ApplicationController
   end
 
   def search
-    @friends = User.results(params[:friend]).uniq
-    if @friends
-      respond_to do |format|
-        format.js { render partial: 'users/results.js' }
+    if params[:friend].present?
+      @friends = User.results(params[:friend]).uniq
+      if @friends
+        respond_to do |format|
+          format.js { render partial: 'users/results.js' }
+        end
+      else
+        flash.now[:alert] = "Please input a valid user email or name"
+        respond_to do |format|
+          format.js { render partial: 'users/results.js' }
+        end
       end
     else
-      flash.now[:alert] = "Please input a valid user email or name"
+      flash.now[:alert] = "Please input an email or username"
       respond_to do |format|
         format.js { render partial: 'users/results.js' }
       end

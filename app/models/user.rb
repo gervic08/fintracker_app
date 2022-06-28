@@ -14,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def stock_already_tracked?(ticker)
-    stock = stocks.where(ticker: ticker)
+    stock = stocks.load.where(ticker: ticker)
     return true if stock.empty?
 
     false

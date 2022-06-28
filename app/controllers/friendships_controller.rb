@@ -12,7 +12,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     friend = User.find_by(id: params[:id])
-    friendship = current_user.friendships.where(friend_id: friend.id).first
+    friendship = current_user.friendships.load.where(friend_id: friend.id).first
     if friendship.destroy
       flash[:notice] = "#{friend.full_name} is not followed by you anymore" 
       redirect_to my_friends_path

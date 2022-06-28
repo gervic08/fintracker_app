@@ -9,32 +9,32 @@
     <strong>Price: </strong><%= @stock.price %>.
   </div>
   <% if current_user.can_track_stock?(@stock.ticker) %>
-    <%= link_to 'Add stock to portfolio', user_stocks_path(user: current_user, ticker: @stock.ticker), method: :post, class: "btn btn-success inline-text" %>
+    <%= link_to 'Add stock to portfolio', user_stocks_path(ticker: @stock.ticker), method: :post, class: "btn btn-success inline-text" %>
   <% end %>  
 <% end %>
 
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"><%= 'Email' %></th>
-      <th scope="col"><%= 'User Name' %></th>
-      <th scope="col"><%= 'Action' %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @friends %>   
-      <% @friends.each do |friend| %>
-        <% unless friend.id == current_user.id %>
+<% if @friends %>   
+  <% @friends.each do |friend| %>
+    
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><%= 'Email' %></th>
+            <th scope="col"><%= 'User Name' %></th>
+            <th scope="col"><%= 'Action' %></th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             <th scope="row"><%= friend.email %></th>
             <td><%= friend.full_name %></td>
             <td>
-            <% unless current_user.friends.include?(friend) %>
+            <% unless current_user.friends.include?(friend) || current_user.id == friend.id %>
               <%= link_to "Follow #{friend.full_name}", friendships_path(friend_id: friend.id), method: :post, class: "btn btn-success inline-text" %></td>
             <% end %>
           </tr>  
-        <% end %>  
-      <% end %>     
-    <% end %>
-  </tbody>
-</table>  
+        </tbody>
+      </table> 
+    
+  <% end %>        
+<% end %>

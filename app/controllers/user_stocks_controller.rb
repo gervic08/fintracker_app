@@ -5,7 +5,7 @@ class UserStocksController < ApplicationController
   def create
     stock ||= Stock.lookup(params[:ticker])
     stock.save! unless stock.persisted?
-    user_stock = UserStock.create(user: current_user, stock: stock)
+    user_stock = current_user.user_stocks.build(stock_id: stock.id)
     if user_stock.save!
       flash[:notice] = "Stock #{stock.name} successfully added to portfolio"
       redirect_to my_portfolio_path
@@ -14,7 +14,7 @@ class UserStocksController < ApplicationController
 
   def destroy
     stock = Stock.find_by(id: params[:id])
-    user_stock = UserStock.where(user_id: current_user, stock_id: stock.id).first
+    user_stock = current_user.user_stocks.load.where(stock_id: stock.id).first
     if user_stock.destroy
       flash[:notice] = "Stock #{stock.name} is not tracked anymore" 
       redirect_to my_portfolio_path
