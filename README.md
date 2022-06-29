@@ -1,4 +1,4 @@
-A Chat App builded in Rails 6.
+A Finance Stocks tracker App builded in Rails 6.
 
 Sqlite3 used for development and test Databases, Postgresql for production, thorugh respective gems, Sqlite3 and PG.
 
