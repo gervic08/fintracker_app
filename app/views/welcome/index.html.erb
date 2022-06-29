@@ -1,3 +1,5 @@
 <h1>Welcome Page</h1>
 
-<%= link_to 'Signout',  destroy_user_session_path, method: :delete %>
+<% if current_user %>
+  <%= link_to 'Signout',  destroy_user_session_path, method: :delete %>
+<% end%>
