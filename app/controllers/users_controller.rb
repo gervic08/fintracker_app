@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @tracked_stocks = @user.stocks 
+    @tracked_stocks = @user.stocks
   end
 
   def search

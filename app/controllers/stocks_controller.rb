@@ -21,4 +21,14 @@ class StocksController < ApplicationController
       end
     end
   end
+
+  def update
+    @stock = current_user.stocks.find_by(ticker: params[:ticker])
+    price = @stock.update_price
+    if @stock.update_attribute :price, price
+      respond_to do |format|
+        format.js { render partial: 'list', locals: { stock: @stock } }
+      end
+    end
+  end
 end
