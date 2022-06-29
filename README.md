@@ -1,25 +1,13 @@
-# README
+A Finance Stocks tracker App builded in Rails 6.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sqlite3 used for development and test Databases, Postgresql for production, thorugh respective gems, Sqlite3 and PG.
 
-Things you may want to cover:
+Users Authentication system with Devise.
 
-* Ruby version
+Frontend builded with HTML (Embedded Ruby code), CSS, JavaScript and Bootstrap.
 
-* System dependencies
+IEX Cloud API to track stocks in real time. Through IEX Gem https://github.com/dblock/iex-ruby-client
 
-* Configuration
+Max tracked stocks per user at the same time: 10
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# fintracker_app
+DEPLOYED in Heroku: https://fintrackerapp.herokuapp.com/
