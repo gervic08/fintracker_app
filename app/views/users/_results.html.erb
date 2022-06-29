@@ -14,7 +14,7 @@
 <% end %>
 
 <% if @friends %>   
-  <% @friends.each do |friend| %>
+  
     
       <table class="table table-hover">
         <thead class="thead-dark">
@@ -25,16 +25,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row"><%= friend.email %></th>
-            <td><%= friend.full_name %></td>
-            <td>
-            <% unless current_user.friends.include?(friend) || current_user.id == friend.id %>
-              <%= link_to "Follow #{friend.full_name}", friendships_path(friend_id: friend.id), method: :post, class: "btn btn-success inline-text" %></td>
-            <% end %>
-          </tr>  
+          <% @friends.each do |friend| %>
+            <tr>
+              <th scope="row"><%= friend.email %></th>
+              <td><%= friend.full_name %></td>
+              <td>
+              <% unless current_user.friends.include?(friend) || current_user.id == friend.id %>
+                <%= link_to "Follow #{friend.full_name}", friendships_path(friend_id: friend.id), method: :post, class: "btn btn-success inline-text" %></td>
+              <% end %>
+            </tr> 
+          <% end %>    
         </tbody>
       </table> 
     
-  <% end %>        
+         
 <% end %>
